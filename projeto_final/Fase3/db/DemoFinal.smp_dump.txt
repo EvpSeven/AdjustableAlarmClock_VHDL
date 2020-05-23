@@ -1,0 +1,10 @@
+
+State Machine - |DemoFinal|Ctr_Maquina:ctr_machine|PS
+Name PS.alarm PS.sdays PS.shours1 PS.shours0 PS.smin1 PS.smin0 PS.running 
+PS.running 0 0 0 0 0 0 0 
+PS.smin0 0 0 0 0 0 1 1 
+PS.smin1 0 0 0 0 1 0 1 
+PS.shours0 0 0 0 1 0 0 1 
+PS.shours1 0 0 1 0 0 0 1 
+PS.sdays 0 1 0 0 0 0 1 
+PS.alarm 1 0 0 0 0 0 1 

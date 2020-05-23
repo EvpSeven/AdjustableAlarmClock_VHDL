@@ -1,0 +1,54 @@
+--Timer Ajust-> Maquina de Estados
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
+
+entity TimeAdjust is 
+	port(valOut0       : in std_logic_vector(3 downto 0);
+		  valOut1       : in std_logic_vector(3 downto 0);
+		  valOut2       : in std_logic_vector(3 downto 0);
+		  valOut3       : in std_logic_vector(3 downto 0);
+		  valOut4       : in std_logic_vector(3 downto 0);
+		 -- clk           : in std_logic;
+		  up_time       : in std_logic;
+		  down_time     : in std_logic;
+		  sel           : in std_logic;
+		  valOut0_adj   : out std_logic_vector(3 downto 0);
+		  valOut1_adj   : out std_logic_vector(3 downto 0);
+		  valOut2_adj   : out std_logic_vector(3 downto 0);
+		  valOut3_adj   : out std_logic_vector(3 downto 0);
+		  valOut4_adj   : out std_logic_vector(3 downto 0)
+		  );
+end TimeAdjust;
+
+architecture shell of TimeAdjust is
+
+	 signal s_valOut0,s_valOut1,s_valOut2,s_valOut3,s_valOut4: std_logic_vector(3 downto 0);
+	 
+	 signal s_1valOut0,s_1valOut1,s_1valOut2,s_1valOut3,s_1valOut4: std_logic_vector(3 downto 0);
+
+begin
+	s_valOut0 <= valOut0;
+
+	s_valOut0 <= s_1valOut0;
+	valOut0_adj <= s_1valOut0;
+
+	
+	process(up_time)
+	begin	
+			if(up_time = '1') then
+					if(s_valOut0 < "1001") then
+						s_valOut0 <= std_logic_vector(unsigned(s_valOut0) + 1);
+					else
+						s_valOut0 <= "0000";
+					end if;
+			else 
+					s_valOut0 <= s_valOut0;
+			end if;		
+		
+	end process;
+	
+
+
+
+end shell;

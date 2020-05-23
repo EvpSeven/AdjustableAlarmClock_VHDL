@@ -1,0 +1,68 @@
+--Timer Ajust-> Maquina de Estados
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
+
+entity Ctr_Maquina is
+	
+	port(clk, k: in std_logic;
+		  sw: in std_logic_vector(1 downto 0);
+		  sel: out std_logic;
+		  sets: out std_logic_vector(1 downto 0)
+		  );
+
+end Ctr_Maquina;
+
+architecture Behav of Ctr_Maquina is
+
+type state is (running,min, hours, days);
+signal PS,NS :state;
+
+begin
+	sync_proc: process(clk)
+	begin
+		if(rising_edge(clk)) then
+			PS <= NS;
+		end if;
+	
+	end process;
+	
+	comb_proc: process(k, sw, PS)
+	begin
+		case PS is
+			when running =>
+				sel <= '0';
+				sets <= "00";
+				if(sw = "01") then
+					NS <= min;
+				else
+					NS <= running;
+				end if;
+				
+			when min =>
+				sel <= '1';
+				sets <= "01";
+				
+				if(k = '1') then
+					NS <= hours;
+				else	
+					NS <= min;
+				end if;
+			
+			when hours =>
+				sel <= '0';
+				sets <= "10";
+				
+				if(k = '1')
+				
+			
+			when days =>
+				sel <= '0';
+				sets <= "11";
+				
+		end case;
+	
+	end process;
+	
+
+end Behav;
